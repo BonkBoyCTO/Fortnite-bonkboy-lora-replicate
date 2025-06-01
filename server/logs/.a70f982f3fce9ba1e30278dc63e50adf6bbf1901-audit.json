@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/jamesyrex/bonkboy-website/server/logs/.a70f982f3fce9ba1e30278dc63e50adf6bbf1901-audit.json",
+    "files": [
+        {
+            "date": 1748796260801,
+            "name": "/Users/jamesyrex/bonkboy-website/server/logs/server-2025-06-01.log",
+            "hash": "1c328b1b55cfe8cdd8d0c3b78f08f90bfaae0f91f9c288ed6736162effb59386"
+        }
+    ],
+    "hashType": "sha256"
+}

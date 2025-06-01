@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom Callback</title>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const phantomEncryptionPublicKey = params.get("phantom_encryption_public_key");
+      const phantomNonce = params.get("phantom_nonce");
+      const phantomData = params.get("phantom_data");
+
+      if (window.opener) {
+        window.opener.postMessage(
+          {
+            type: "phantom_callback",
+            phantom_encryption_public_key: phantomEncryptionPublicKey,
+            phantom_nonce: phantomNonce,
+            phantom_data: phantomData,
+          },
+          "*"
+        );
+        window.close();
+      }
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>

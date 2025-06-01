@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BONKBOY | PAGE NAME</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
+</head>
+<body>
+
+  <!-- 🎥 Desktop Intro -->
+  <video id="introVideo" class="desktop-only" autoplay muted playsinline>
+    <source src="assets/background.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- 🔁 Desktop Loop (change this per page if needed) -->
+  <video id="loopVideo" class="desktop-only" muted playsinline loop style="display: none;">
+    <source src="assets/background2.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- 📱 Mobile Video -->
+  <video id="mobileVideo" class="mobile-only" autoplay muted playsinline loop>
+    <source src="assets/mobilevid1.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- 🎯 UI Overlay with Sidebar Buttons -->
+  <div id="overlay">
+    <div class="ui-buttons">
+      <button class="neon-button" id="walletToggle">Connect Wallet</button>
+      <div class="wallet-status" id="walletStatus">Wallet not connected</div>
+      <div class="wallet-balance" id="bonkboyBalance">Balance: -</div>
+      <button class="neon-button retry-button" id="retryBalance" style="display: none;">Retry Balance</button>
+      <button class="neon-button" onclick="location.href='memegenerator.html'">Meme Generator</button>
+      <button class="neon-button" onclick="location.href='merch.html'">Merch</button>
+      <button class="neon-button" onclick="location.href='media.html'">Media</button>
+      <button class="neon-button" onclick="location.href='competitions.html'">Competitions</button>
+      <button class="neon-button" onclick="location.href='roadmap.html'">Roadmap</button>
+      <button class="neon-button" onclick="location.href='whitepaper.html'">Whitepaper</button>
+      <button class="neon-button" onclick="location.href='topholders.html'">Top Holders</button>
+    </div>
+  </div>
+
+  <!-- ✅ Wallet + Video Logic -->
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const intro = document.getElementById("introVideo");
+      const loop = document.getElementById("loopVideo");
+
+      loop.style.display = "none";
+      loop.pause();
+
+      intro.addEventListener("ended", () => {
+        intro.style.display = "none";
+        loop.style.display = "block";
+        loop.play().catch(err => console.error("Loop video play error:", err));
+      });
+
+      setTimeout(() => {
+        if (intro && loop && loop.style.display === "none") {
+          intro.style.display = "none";
+          loop.style.display = "block";
+          loop.play().catch(err => console.error("Loop fallback error:", err));
+        }
+      }, 5000); // Match this to intro video duration
+    });
+  </script>
+
+</body>
+</html>

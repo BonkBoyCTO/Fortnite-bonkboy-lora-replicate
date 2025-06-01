@@ -1,0 +1,35 @@
+[2025-06-01T14:10:38.931Z] INFO: ✅ Backend server running on port 3001
+[2025-06-01T14:10:51.680Z] INFO: 🔍 Checking BONKBOY balance for wallet: testwallet
+[2025-06-01T14:10:51.684Z] INFO: GET /api/balance/testwallet 400 34 - 8.571 ms
+[2025-06-01T14:10:52.262Z] INFO: GET /favicon.ico 404 69 - 0.917 ms
+[2025-06-01T14:20:48.615Z] INFO: ✅ Backend server running on port 3001
+[2025-06-01T14:20:56.738Z] INFO: GET /healthcheck 200 37 - 237.200 ms
+[2025-06-01T14:21:04.125Z] INFO: 🔍 Request received for BONKBOY balance: H9dCSrbQAGTfzCBMenZpwy88JdwkZjvdAatuvrzaNszu
+[2025-06-01T14:21:04.328Z] INFO: ✅ Balance for H9dCSrbQAGTfzCBMenZpwy88JdwkZjvdAatuvrzaNszu: 9098203.914771
+[2025-06-01T14:21:04.329Z] INFO: GET /api/balance/H9dCSrbQAGTfzCBMenZpwy88JdwkZjvdAatuvrzaNszu 304 - - 204.728 ms
+[2025-06-01T16:44:20.815Z] INFO: ✅ Backend server running on port 3001
+[2025-06-01T16:45:43.104Z] INFO: GET / 200 31 - 9.098 ms
+[2025-06-01T16:45:43.196Z] INFO: GET /.well-known/appspecific/com.chrome.devtools.json 404 69 - 1.661 ms
+[2025-06-01T16:45:43.647Z] INFO: GET /favicon.ico 404 69 - 0.722 ms
+[2025-06-01T16:50:24.462Z] INFO: ✅ Backend server running on port 3001
+[2025-06-01T16:50:44.664Z] INFO: GET / 304 - - 8.189 ms
+[2025-06-01T16:50:44.677Z] INFO: GET /.well-known/appspecific/com.chrome.devtools.json 404 69 - 1.624 ms
+[2025-06-01T16:50:47.812Z] INFO: GET / 304 - - 0.455 ms
+[2025-06-01T16:50:47.825Z] INFO: GET /.well-known/appspecific/com.chrome.devtools.json 404 69 - 0.507 ms
+[2025-06-01T16:50:59.868Z] INFO: 🔍 Request received for BONKBOY balance: H9dCSrbQAGTfzCBMenZpwy88JdwkZjvdAatuvrzaNszu
+[2025-06-01T16:51:00.050Z] ERROR: ❌ Failed to fetch balance for H9dCSrbQAGTfzCBMenZpwy88JdwkZjvdAatuvrzaNszu: 401 Unauthorized: {"jsonrpc":"2.0","error":{"code":-32401,"message":"invalid api key provided"}}
+[2025-06-01T16:51:00.051Z] INFO: GET /api/balance/H9dCSrbQAGTfzCBMenZpwy88JdwkZjvdAatuvrzaNszu 500 35 - 183.059 ms
+[2025-06-01T16:51:00.085Z] INFO: GET /.well-known/appspecific/com.chrome.devtools.json 404 69 - 0.692 ms
+[2025-06-01T16:51:10.046Z] INFO: GET /.well-known/appspecific/com.chrome.devtools.json 404 69 - 0.359 ms
+[2025-06-01T16:51:10.052Z] INFO: GET /.well-known/appspecific/com.chrome.devtools.json 404 69 - 0.429 ms
+[2025-06-01T16:54:39.105Z] INFO: ✅ Backend server running on port 3001
+[2025-06-01T16:58:21.379Z] INFO: GET /index.html 404 69 - 7.517 ms
+[2025-06-01T16:58:29.227Z] INFO: GET /index.html 404 69 - 0.654 ms
+[2025-06-01T16:58:51.185Z] INFO: GET /index.html 404 69 - 0.514 ms
+[2025-06-01T18:19:27.051Z] INFO: ✅ Backend server running on port 3001
+[2025-06-01T18:19:27.397Z] INFO: ✅ Backend server running on port 3001
+[2025-06-01T18:23:25.590Z] INFO: ✅ Backend server running on port 3001
+[2025-06-01T18:23:25.859Z] INFO: ✅ Backend server running on port 3001
+[2025-06-01T18:25:13.179Z] INFO: ✅ Backend server running on port 3001
+[2025-06-01T18:25:31.586Z] INFO: ✅ Backend server running on port 3001
+[2025-06-01T18:28:18.979Z] INFO: ✅ Backend server running on port 3001

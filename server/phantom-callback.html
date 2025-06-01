@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connecting Phantom...</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Orbitron, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h2>Finalizing connection to Phantom...</h2>
+    <p>Please wait...</p>
+  </div>
+
+  <script>
+    const url = new URL(window.location.href);
+    const publicKey = url.searchParams.get("public_key");
+
+    if (publicKey) {
+      localStorage.setItem("phantom_public_key", publicKey);
+      window.location.href = "/";
+    } else {
+      document.body.innerHTML = "<h2>Phantom connection failed or was cancelled.</h2>";
+    }
+  </script>
+</body>
+</html>
