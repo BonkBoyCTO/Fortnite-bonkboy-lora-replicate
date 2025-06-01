@@ -1,4 +1,4 @@
-// ✅ FRONTEND app.js (updated with full API URL)
+// ✅ FRONTEND app.js (cleaned, fixed, fully functional)
 
 const walletToggle = document.getElementById('walletToggle');
 const walletStatus = document.getElementById('walletStatus');
@@ -31,7 +31,7 @@ async function fetchBalance() {
   if (!walletAddress) return;
   bonkboyBalance.textContent = 'Balance: ...';
   try {
-const res = await fetch(`/api/balance/${walletAddress}`);
+    const res = await fetch(`/api/balance/${walletAddress}`);
     const data = await res.json();
     if (data.balance !== undefined) {
       bonkboyBalance.textContent = `Balance: ${data.balance} BONKBOY`;
@@ -48,7 +48,7 @@ const res = await fetch(`/api/balance/${walletAddress}`);
 // 🔌 Connect Wallet
 async function connectWallet() {
   try {
-    if (!window.solana || !window.solana.isPhantom) {
+    if (!isPhantomInstalled()) {
       alert("Please install Phantom Wallet to use this feature.");
       return;
     }
@@ -88,12 +88,13 @@ window.addEventListener('DOMContentLoaded', () => {
     fetchBalance();
   }
 
-  walletToggle.addEventListener('click', toggleWallet);
-  retryButton.addEventListener('click', fetchBalance);
+  walletToggle?.addEventListener('click', toggleWallet);
+  retryButton?.addEventListener('click', fetchBalance);
 
-  // 🔥 Make overlay visible
+  // 🔥 Fade-in animation
   document.getElementById('overlay')?.classList.add('fade-in');
-    // 📂 Navigation button handlers
+
+  // 📂 Navigation button handlers
   document.getElementById('memeGenerator')?.addEventListener('click', () => {
     location.href = '/memegenerator.html';
   });
@@ -121,5 +122,4 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('topHolders')?.addEventListener('click', () => {
     location.href = '/topholders.html';
   });
-
 });

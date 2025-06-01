@@ -16,11 +16,6 @@ const PORT = process.env.PORT || 3001;
 // 🔥 Serve static frontend files
 app.use(express.static(path.join(__dirname, '../public')));
 
-// 🔁 Serve index.html on root
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
-});
-
 // 🔐 Middleware
 app.use(cors());
 app.use(helmet());
