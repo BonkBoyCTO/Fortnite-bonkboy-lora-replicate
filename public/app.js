@@ -31,7 +31,7 @@ async function fetchBalance() {
   if (!walletAddress) return;
   bonkboyBalance.textContent = 'Balance: ...';
   try {
-    const res = await fetch(`https://bonkboy-homepage.onrender.com/api/balance/${walletAddress}`);
+const res = await fetch(`/api/balance/${walletAddress}`);
     const data = await res.json();
     if (data.balance !== undefined) {
       bonkboyBalance.textContent = `Balance: ${data.balance} BONKBOY`;
@@ -93,4 +93,33 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // 🔥 Make overlay visible
   document.getElementById('overlay')?.classList.add('fade-in');
+    // 📂 Navigation button handlers
+  document.getElementById('memeGenerator')?.addEventListener('click', () => {
+    location.href = '/memegenerator.html';
+  });
+
+  document.getElementById('merch')?.addEventListener('click', () => {
+    location.href = '/merch.html';
+  });
+
+  document.getElementById('media')?.addEventListener('click', () => {
+    location.href = '/media.html';
+  });
+
+  document.getElementById('competitions')?.addEventListener('click', () => {
+    location.href = '/competitions.html';
+  });
+
+  document.getElementById('roadmap')?.addEventListener('click', () => {
+    location.href = '/roadmap.html';
+  });
+
+  document.getElementById('whitepaper')?.addEventListener('click', () => {
+    location.href = '/whitepaper.html';
+  });
+
+  document.getElementById('topHolders')?.addEventListener('click', () => {
+    location.href = '/topholders.html';
+  });
+
 });
