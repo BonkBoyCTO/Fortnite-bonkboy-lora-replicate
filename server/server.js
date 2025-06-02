@@ -3,7 +3,6 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const morgan = require('morgan');
 const winston = require('winston');
 require('winston-daily-rotate-file');
 require('dotenv').config();
@@ -48,19 +47,19 @@ const TOKEN_PROGRAM_ID = new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ
 const RPC_ENDPOINT = process.env.HELIUS_RPC_URL || "https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY";
 const connection = new Connection(RPC_ENDPOINT);
 
-// 🛡 Rate Limit
+// 🛡 Rate Limiting
 app.use(rateLimit({
   windowMs: 60 * 1000,
   max: 30,
   message: "⏳ Too many requests. Please slow down.",
 }));
 
-// 🔁 Redirect root to index.html
+// 🌐 Serve index.html on root
 app.get('/', (req, res) => {
- res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-// ✅ Health
+// ✅ Healthcheck
 app.get('/healthcheck', async (req, res) => {
   try {
     const slot = await connection.getSlot();
@@ -71,26 +70,45 @@ app.get('/healthcheck', async (req, res) => {
   }
 });
 
-// 💸 Token Balance
+// 💸 Token Balance API
 app.get('/api/balance/:wallet', async (req, res) => {
   const { wallet } = req.params;
-  logger.info(`🔍 Request received for BONKBOY balance: ${wallet}`);
+  logger.info(`🔍 Checking balance for wallet: ${wallet}`);
 
   try {
     const ownerPubkey = new PublicKey(wallet);
+    logger.info(`✅ PublicKey created for: ${ownerPubkey.toBase58()}`);
+
     const tokenAccounts = await connection.getParsedTokenAccountsByOwner(ownerPubkey, {
       programId: TOKEN_PROGRAM_ID,
     });
+    logger.info(`🔍 Token accounts fetched for wallet: ${wallet}`);
 
-    const bonkAccount = tokenAccounts.value.find(acc =>
-      acc.account.data.parsed.info.mint === BONKBOY_TOKEN
+    if (!tokenAccounts.value || tokenAccounts.value.length === 0) {
+      logger.warn(`⚠️ No token accounts found for wallet: ${wallet}`);
+      return res.json({ balance: 0, tokens: [] });
+    }
+
+    const debugTokens = tokenAccounts.value.map(acc => {
+      const mint = acc.account.data.parsed.info.mint;
+      const amount = acc.account.data.parsed.info.tokenAmount.uiAmount;
+      return { mint, amount };
+    });
+
+    logger.info(`🧪 Token list for wallet ${wallet}: ${JSON.stringify(debugTokens, null, 2)}`);
+
+    const bonkAccount = tokenAccounts.value.find(
+      acc => acc.account.data.parsed.info.mint === BONKBOY_TOKEN
     );
 
-    const uiAmount = bonkAccount?.account.data.parsed.info.tokenAmount.uiAmount || 0;
+    if (!bonkAccount) {
+      logger.warn(`⚠️ BONKBOY token not found in wallet: ${wallet}`);
+    }
 
-    logger.info(`✅ Balance for ${wallet}: ${uiAmount}`);
-    res.set('Cache-Control', 'no-store');
-    return res.json({ balance: uiAmount });
+    const uiAmount = bonkAccount?.account.data.parsed.info.tokenAmount.uiAmount || 0;
+    logger.info(`✅ BONKBOY Balance for ${wallet}: ${uiAmount}`);
+
+    return res.json({ balance: uiAmount, tokens: debugTokens });
   } catch (err) {
     logger.error(`❌ Failed to fetch balance for ${wallet}: ${err.message}`);
     return res.status(500).json({ error: "Failed to fetch balance" });
@@ -104,7 +122,7 @@ app.use((req, res) => {
   });
 });
 
-// 🚀 Start Server
+// 🚀 Launch Server
 app.listen(PORT, () => {
   logger.info(`✅ Backend server running on port ${PORT}`);
 });
