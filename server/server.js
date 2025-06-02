@@ -44,8 +44,12 @@ const logger = winston.createLogger({
 // 💰 Solana Config
 const BONKBOY_TOKEN = "BEyp5W9oQosUDD2hPt2Qeg6fuAkNUbnvR6ZJhD8Ybonk";
 const TOKEN_PROGRAM_ID = new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
-const RPC_ENDPOINT = process.env.HELIUS_RPC_URL || "https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY";
+app.set('trust proxy', 1); // ✅ Trust Render's proxy
+
+const HELIUS_API_KEY = process.env.HELIUS_API_KEY;
+const RPC_ENDPOINT = `https://mainnet.helius-rpc.com/?api-key=${HELIUS_API_KEY}`;
 const connection = new Connection(RPC_ENDPOINT);
+
 
 // 🛡 Rate Limiting
 app.use(rateLimit({
