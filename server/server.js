@@ -51,7 +51,6 @@ const RPC_ENDPOINT = `https://mainnet.helius-rpc.com/?api-key=${HELIUS_API_KEY}`
 console.log("✅ Using Solana RPC:", RPC_ENDPOINT);
 const connection = new Connection(RPC_ENDPOINT);
 
-
 // 🛡 Rate Limiting
 app.use(rateLimit({
   windowMs: 60 * 1000,
